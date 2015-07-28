@@ -8,4 +8,5 @@
     <string name="search_url">http://api.pearson.com:80/kitchen-manager/v1/recipes?name-contains=</string>
     <string name="recipe_url">http://api.pearson.com/kitchen-manager/v1/recipes/</string>
     <string name="image_url">http://api.pearson.com/kitchen-manager/v1/images/full/</string>
+    <string name="title_activity_search">SearchActivity</string>
 </resources>

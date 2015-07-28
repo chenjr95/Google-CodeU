@@ -50,6 +50,7 @@ public class LoginActivity extends Activity{
     private static final Integer LOGIN_SUCCESS = 2;
 
     public static String favorites = "";
+    public static ParseObject user = null;
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -251,7 +252,6 @@ public class LoginActivity extends Activity{
         @Override
         protected void onPostExecute(final Integer success) {
             mAuthTask = null;
-            List<ParseObject> queriedTrainees = null;
             if (success.equals(LOGIN_SUCCESS)) {
                 EditText usernameField = (EditText) findViewById(R.id.username);
                 EditText passwordField = (EditText) findViewById(R.id.password);
@@ -259,6 +259,7 @@ public class LoginActivity extends Activity{
                 passwordField.setText("");
 
                 LoginActivity.favorites = users.get(0).getString("Favorites");
+                LoginActivity.user = users.get(0);
 
                 Intent i = new Intent(loginActivity, HomeActivity.class);
                 startActivity(i);
