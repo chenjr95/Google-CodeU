@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:hint="keyword"
-        android:id="@+id/yourProgramTop"
+        android:id="@+id/search_entry"
         android:inputType="text" android:maxLines="1"
         android:singleLine="true"
         android:layout_marginBottom="60px"
@@ -27,7 +27,7 @@
         android:layout_alignParentStart="false"
         style="?android:textAppearanceSmall"
         android:text="Search"
-        android:layout_toEndOf="@id/yourProgramTop" />
+        android:layout_toEndOf="@id/search_entry" />
 
     <TextView
         android:layout_width="wrap_content"

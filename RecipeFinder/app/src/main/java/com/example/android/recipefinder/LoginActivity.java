@@ -148,11 +148,11 @@ public class LoginActivity extends Activity{
     }
 
     private boolean isUsernameValid(String username) {
-        return username.length() > 4;
+        return username.length() >= 4;
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 3;
+        return password.length() >= 3;
     }
 
     public static String convertStreamToString(InputStream inputStream) throws IOException {
@@ -229,30 +229,6 @@ public class LoginActivity extends Activity{
 
         @Override
         protected Integer doInBackground(Void... params) {
-
-            try {
-                HttpClient httpclient = new DefaultHttpClient();
-                HttpResponse response = httpclient.execute(new HttpGet("http://api.pearson.com/kitchen-manager/v1/recipes?name-contains=beef"));
-                StatusLine statusLine = response.getStatusLine();
-                if(statusLine.getStatusCode() == HttpStatus.SC_OK){
-                    ByteArrayOutputStream out = new ByteArrayOutputStream();
-                    response.getEntity().writeTo(out);
-                    String responseString = out.toString();
-                    out.close();
-                    Log.d("abc", responseString);
-                } else{
-                    //Closes the connection.
-                    response.getEntity().getContent().close();
-                    throw new IOException(statusLine.getReasonPhrase());
-                }
-            } catch (ClientProtocolException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
             ParseQuery<ParseObject> query = ParseQuery.getQuery("User");
             query.whereEqualTo("Username", mUsername);
             try{
@@ -284,8 +260,8 @@ public class LoginActivity extends Activity{
 
                 LoginActivity.favorites = users.get(0).getString("Favorites");
 
-                //Intent i = new Intent(loginActivity, HomeActivity.class);
-                //startActivity(i);
+                Intent i = new Intent(loginActivity, HomeActivity.class);
+                startActivity(i);
 
             } else if(success.equals(WRONG_PASSWORD)){
                 mPasswordView.setText("");

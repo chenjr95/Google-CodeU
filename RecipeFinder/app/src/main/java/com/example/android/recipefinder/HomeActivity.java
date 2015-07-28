@@ -20,19 +20,20 @@ public class HomeActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        ListView traineesList = (ListView) findViewById(R.id.listView);
-        String[] favoritesNames = LoginActivity.favorites.split(",");
+        ListView listView = (ListView) findViewById(R.id.listView);
+        final String[] favoriteIds = LoginActivity.favorites.split(",");
 
         ArrayAdapter<String> arrayAdapter =
-                new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, favoritesNames);
-        traineesList.setAdapter(arrayAdapter);
+                new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, favoriteIds);
+        listView.setAdapter(arrayAdapter);
 
-        traineesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                //Intent i = new Intent(getApplicationContext(), EvaluationActivity.class);
-                //startActivity(i);
+                Intent i = new Intent(getApplicationContext(), RecipeActivity.class);
+                i.putExtra("id", favoriteIds[position]);
+                startActivity(i);
             }
         });
     }
