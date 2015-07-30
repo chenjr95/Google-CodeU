@@ -27,6 +27,7 @@
         android:layout_alignParentStart="false"
         style="?android:textAppearanceSmall"
         android:text="Search"
+        android:onClick="search"
         android:layout_toEndOf="@id/search_entry" />
 
     <TextView

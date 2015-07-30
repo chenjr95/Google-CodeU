@@ -9,6 +9,8 @@ import com.google.gson.JsonParser;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+
 /**
  * Created by Andy on 7/27/2015.
  */
@@ -68,6 +70,17 @@ public class JsonDecoder {
             }
             result += quantity + unit + preparation + name + " \n";
         }
+        return result;
+    }
+
+    public ArrayList<String> getSearchResults(){
+        JsonArray ing_array = decoded.get("results").getAsJsonArray();
+        ArrayList<String> result = new ArrayList<>();
+
+        for(JsonElement j : ing_array){
+            result.add(j.getAsJsonObject().get("id").toString().replace("\"", ""));
+        }
+
         return result;
     }
 

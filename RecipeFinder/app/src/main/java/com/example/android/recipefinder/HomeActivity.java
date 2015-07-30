@@ -1,5 +1,6 @@
 package com.example.android.recipefinder;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -16,8 +18,8 @@ import java.util.ArrayList;
 public class HomeActivity extends ActionBarActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onResume() {
+        super.onResume();
         setContentView(R.layout.activity_home);
 
         ListView listView = (ListView) findViewById(R.id.listView);
@@ -36,6 +38,11 @@ public class HomeActivity extends ActionBarActivity {
                 startActivity(i);
             }
         });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -58,5 +65,12 @@ public class HomeActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void search (View view){
+        Intent i = new Intent(this, SearchActivity.class);
+        TextView t = (TextView) findViewById(R.id.search_entry);
+        i.putExtra("search", t.getText().toString());
+        startActivity(i);
     }
 }

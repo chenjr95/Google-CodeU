@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -44,7 +45,7 @@ import java.util.Set;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends Activity{
+public class LoginActivity extends ActionBarActivity {
     private static final Integer WRONG_USERNAME = 0;
     private static final Integer WRONG_PASSWORD = 1;
     private static final Integer LOGIN_SUCCESS = 2;
