@@ -20,6 +20,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -63,16 +67,45 @@ public class RecipeActivity extends ActionBarActivity {
         imgView = (ImageView) findViewById(R.id.image_body);
 
         Button saveButton = (Button) findViewById(R.id.save_button);
-        CheckBox saveCheckbox = (CheckBox) findViewById(R.id.save_check);
+        final CheckBox saveCheckbox = (CheckBox) findViewById(R.id.save_check);
+
+        if(LoginActivity.favorites.contains(id)){
+            saveCheckbox.setChecked(true);
+        }
+
+        final SaveCallback mSaveCallback = new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                Toast.makeText(RecipeActivity.this, "Recipe saved!", Toast.LENGTH_SHORT).show();
+            }
+        };
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
-
+                if(saveCheckbox.isChecked()){
+                    if(LoginActivity.favorites.isEmpty()){
+                        LoginActivity.favorites = id;
+                    }
+                    else{
+                        LoginActivity.favorites = LoginActivity.favorites + "," + id;
+                    }
+                }
+                else{
+                    if(LoginActivity.favorites.contains("," + id)){
+                        LoginActivity.favorites = LoginActivity.favorites.replace("," + id, "");
+                    }
+                    else if(LoginActivity.favorites.contains(id + ",")){
+                        LoginActivity.favorites = LoginActivity.favorites.replace(id + "," , "");
+                    }
+                    else{
+                        LoginActivity.favorites = LoginActivity.favorites.replace(id , "");
+                    }
+                }
+                LoginActivity.user.put("Favorites", LoginActivity.favorites);
+                LoginActivity.user.saveInBackground(mSaveCallback);
             }
         });
-
 
         recipeView = findViewById(R.id.recipe_view);
         progressView = findViewById(R.id.progress_view);

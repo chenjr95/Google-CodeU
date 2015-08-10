@@ -36,8 +36,6 @@ import java.util.HashMap;
 
 public class SearchActivity extends ActionBarActivity {
     private ArrayList<String> ids = new ArrayList<>();
-    private HashMap<String, Integer> recipeMap = new HashMap<>();
-    private View buttonView;
     private View textView;
     private View progressView;
     private Context c;
@@ -49,7 +47,6 @@ public class SearchActivity extends ActionBarActivity {
         setContentView(R.layout.activity_search);
 
         recipeList = (ListView) findViewById(R.id.recipesList);
-        buttonView = findViewById(R.id.saveFavs);
         textView = findViewById(R.id.textView);
         progressView = findViewById(R.id.progress_view);
 
@@ -95,20 +92,19 @@ public class SearchActivity extends ActionBarActivity {
             JsonDecoder decoder = new JsonDecoder(result);
             ids = decoder.getSearchResults();
 
-            int index = 0;
-            for(String id : ids) {
-                recipeMap.put(id, index);
-                index++;
-            }
-
             ArrayAdapter<String> recipesAdapter =
-                    new ArrayAdapter<>(c, android.R.layout.simple_list_item_multiple_choice, ids);
+                    new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, ids);
             recipeList.setAdapter(recipesAdapter);
-            for(String t : recipeMap.keySet()){
-                if(LoginActivity.favorites.contains(t)){
-                    recipeList.setItemChecked(recipeMap.get(t), true);
+
+            recipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    Intent i = new Intent(getApplicationContext(), RecipeActivity.class);
+                    i.putExtra("id", ids.get(position));
+                    startActivity(i);
                 }
-            }
+            });
 
             showProgress(false);
         }
@@ -134,15 +130,6 @@ public class SearchActivity extends ActionBarActivity {
                 }
             });
 
-            buttonView.setVisibility(show ? View.GONE : View.VISIBLE);
-            buttonView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    buttonView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
             textView.setVisibility(show ? View.GONE : View.VISIBLE);
             textView.animate().setDuration(shortAnimTime).alpha(
                     show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
@@ -165,51 +152,7 @@ public class SearchActivity extends ActionBarActivity {
             // and hide the relevant UI components.
             progressView.setVisibility(show ? View.VISIBLE : View.GONE);
             recipeList.setVisibility(show ? View.GONE : View.VISIBLE);
-            buttonView.setVisibility(show ? View.GONE : View.VISIBLE);
             textView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
-    }
-
-    public void save(View view) {
-        for (String t : recipeMap.keySet()) {
-            if (recipeList.isItemChecked(recipeMap.get(t))) {
-                addRecipe(t);
-            } else if (!recipeList.isItemChecked(recipeMap.get(t))) {
-                removeRecipe(t);
-            }
-        }
-        Intent i = new Intent(this, HomeActivity.class);
-        startActivity(i);
-    }
-
-    //add trainee to program
-    private void addRecipe(String t) {
-        if(!LoginActivity.favorites.contains(t)){
-            if(LoginActivity.favorites.isEmpty()){
-                LoginActivity.favorites = t;
-            }
-            else{
-                LoginActivity.favorites = LoginActivity.favorites + "," + t;
-            }
-            LoginActivity.user.put("Favorites", LoginActivity.favorites);
-            LoginActivity.user.saveInBackground();
-        }
-    }
-
-    //remove trainee from program
-    private void removeRecipe(String t) {
-        if(LoginActivity.favorites.contains(t)){
-            if(LoginActivity.favorites.contains("," + t)){
-                LoginActivity.favorites = LoginActivity.favorites.replace("," + t , "");
-            }
-            else if(LoginActivity.favorites.contains(t + ",")){
-                LoginActivity.favorites = LoginActivity.favorites.replace(t + "," , "");
-            }
-            else{
-                LoginActivity.favorites = LoginActivity.favorites.replace(t , "");
-            }
-            LoginActivity.user.put("Favorites", LoginActivity.favorites);
-            LoginActivity.user.saveInBackground();
         }
     }
 }
