@@ -3,21 +3,17 @@ package com.example.android.recipefinder;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -61,18 +57,6 @@ public class RecipeActivity extends ActionBarActivity {
         ingsView = (TextView) findViewById(R.id.ingredients_body);
         directionsView = (TextView) findViewById(R.id.directions_body);
         imgView = (ImageView) findViewById(R.id.image_body);
-
-        Button saveButton = (Button) findViewById(R.id.save_button);
-        CheckBox saveCheckbox = (CheckBox) findViewById(R.id.save_check);
-
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                
-
-            }
-        });
-
 
         recipeView = findViewById(R.id.recipe_view);
         progressView = findViewById(R.id.progress_view);

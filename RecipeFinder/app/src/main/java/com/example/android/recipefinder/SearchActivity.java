@@ -3,22 +3,15 @@ package com.example.android.recipefinder;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import com.parse.ParseObject;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -101,6 +94,8 @@ public class SearchActivity extends ActionBarActivity {
                 index++;
             }
 
+
+            //important
             ArrayAdapter<String> recipesAdapter =
                     new ArrayAdapter<>(c, android.R.layout.simple_list_item_multiple_choice, ids);
             recipeList.setAdapter(recipesAdapter);
@@ -185,13 +180,10 @@ public class SearchActivity extends ActionBarActivity {
     //add trainee to program
     private void addRecipe(String t) {
         if(!LoginActivity.favorites.contains(t)){
-            if(LoginActivity.favorites.isEmpty()){
-                LoginActivity.favorites = t;
-            }
-            else{
-                LoginActivity.favorites = LoginActivity.favorites + "," + t;
-            }
-            LoginActivity.user.put("Favorites", LoginActivity.favorites);
+
+            LoginActivity.favorites.add(t);
+
+            LoginActivity.user.put("Favorites", LoginActivity.join(LoginActivity.favorites));
             LoginActivity.user.saveInBackground();
         }
     }
@@ -199,16 +191,8 @@ public class SearchActivity extends ActionBarActivity {
     //remove trainee from program
     private void removeRecipe(String t) {
         if(LoginActivity.favorites.contains(t)){
-            if(LoginActivity.favorites.contains("," + t)){
-                LoginActivity.favorites = LoginActivity.favorites.replace("," + t , "");
-            }
-            else if(LoginActivity.favorites.contains(t + ",")){
-                LoginActivity.favorites = LoginActivity.favorites.replace(t + "," , "");
-            }
-            else{
-                LoginActivity.favorites = LoginActivity.favorites.replace(t , "");
-            }
-            LoginActivity.user.put("Favorites", LoginActivity.favorites);
+            LoginActivity.favorites.remove(t);
+            LoginActivity.user.put("Favorites", LoginActivity.join(LoginActivity.favorites));
             LoginActivity.user.saveInBackground();
         }
     }
