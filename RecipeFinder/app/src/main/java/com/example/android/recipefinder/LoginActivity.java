@@ -275,17 +275,7 @@ public class LoginActivity extends ActionBarActivity {
 
     }
 
-//    // for join:
-//    String result = "";
-//    for(String s : S) {
-//        result += s + ",";
-//    }
-//    return result;
-//    except -- no comma at the very end
-//    A,B,C, = WRONG
-//    A, = WRONG
-//            A,B,C = RIGHT
-//            - Enter key to search
+//    - Enter key to search
 //    - UI change to fix the resizing
 //    - favorites --> hashset
 
