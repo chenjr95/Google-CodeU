@@ -63,7 +63,7 @@ public class RecipeActivity extends ActionBarActivity {
         ingsView = (TextView) findViewById(R.id.ingredients_body);
         directionsView = (TextView) findViewById(R.id.directions_body);
         imgView = (ImageView) findViewById(R.id.image_body);
-        
+
         Button saveButton = (Button) findViewById(R.id.save_button);
         final CheckBox saveCheckbox = (CheckBox) findViewById(R.id.save_check);
 
