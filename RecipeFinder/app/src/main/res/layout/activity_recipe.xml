@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="30px"
+                android:layout_marginBottom="30dp"
                 android:orientation="horizontal">
                 <Button
                     android:layout_width="wrap_content"
@@ -35,79 +35,91 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/save_check"
-                    android:layout_marginLeft="30px"/>
+                    android:layout_marginLeft="30dp"/>
 
             </LinearLayout>
 
              <ImageView
                 android:id="@+id/image_body"
-                android:layout_marginBottom="15px"
+                android:layout_marginBottom="15dp"
                 android:layout_width="400px"
                 android:layout_height="400px" />
 
             <TextView android:text="Name: "
                 android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView android:text="name_here"
                 android:id="@+id/name_body"
-                android:layout_marginBottom="15px"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginBottom="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView android:text="Cuisine: "
                 android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView android:text="cuisine_here"
                 android:id="@+id/cuisine_body"
-                android:layout_marginBottom="15px"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginBottom="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView android:text="Cooking Method: "
                 android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView android:text="method_here"
                 android:id="@+id/method_body"
-                android:layout_marginBottom="15px"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginBottom="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView android:text="Serves: "
+                android:fontFamily="sans-serif-condensed"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView android:text="serves_here"
                 android:id="@+id/serves_body"
-                android:layout_marginBottom="15px"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginBottom="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
                 <TextView android:text="Ingredients: "
                     android:textStyle="bold"
+                    android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView android:text="ingredients_here"
                     android:id="@+id/ingredients_body"
-                    android:layout_marginBottom="15px"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_marginBottom="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView android:text="Directions: "
                     android:textStyle="bold"
+                    android:fontFamily="sans-serif-condensed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView android:text="directions_here"
                     android:id="@+id/directions_body"
-                    android:layout_marginBottom="15px"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_marginBottom="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
