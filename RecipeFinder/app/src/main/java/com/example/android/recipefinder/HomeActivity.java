@@ -24,9 +24,10 @@ public class HomeActivity extends ActionBarActivity {
 
         ListView listView = (ListView) findViewById(R.id.listView);
         final String[] favoriteIds = LoginActivity.favorites.split(",");
+        final String[] favoriteNames = LoginActivity.favorites.replace("-", " ").split(",");
 
         ArrayAdapter<String> arrayAdapter =
-                new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, favoriteIds);
+                new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, favoriteNames);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,7 +71,7 @@ public class HomeActivity extends ActionBarActivity {
     public void search (View view){
         Intent i = new Intent(this, SearchActivity.class);
         TextView t = (TextView) findViewById(R.id.search_entry);
-        i.putExtra("search", t.getText().toString());
+        i.putExtra("search", t.getText().toString().replace(" ", "%20"));
         startActivity(i);
     }
 }

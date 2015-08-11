@@ -3,23 +3,16 @@ package com.example.android.recipefinder;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import com.parse.ParseObject;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -27,12 +20,9 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 
 public class SearchActivity extends ActionBarActivity {
     private ArrayList<String> ids = new ArrayList<>();
@@ -56,7 +46,7 @@ public class SearchActivity extends ActionBarActivity {
         c = this;
 
         showProgress(true);
-        new RequestTask().execute("http://api.pearson.com/kitchen-manager/v1/recipes?name-contains=" + search);
+        new RequestTask().execute("http://api.pearson.com/kitchen-manager/v1/recipes?name-contains=" + search + "&limit=20");
     }
 
     private class RequestTask extends AsyncTask<String, String, String> {
@@ -92,8 +82,13 @@ public class SearchActivity extends ActionBarActivity {
             JsonDecoder decoder = new JsonDecoder(result);
             ids = decoder.getSearchResults();
 
+            ArrayList<String> favoritesName =  new ArrayList<>();
+            for(String s : ids){
+                favoritesName.add(s.replace("-", " "));
+            }
+
             ArrayAdapter<String> recipesAdapter =
-                    new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, ids);
+                    new ArrayAdapter<>(c, android.R.layout.simple_list_item_1, favoritesName);
             recipeList.setAdapter(recipesAdapter);
 
             recipeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

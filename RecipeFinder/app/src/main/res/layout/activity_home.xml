@@ -17,7 +17,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:hint="keyword"
+            android:hint="keyword (required)"
             android:id="@+id/search_entry"
             android:inputType="text" android:maxLines="1"
             android:singleLine="true"
