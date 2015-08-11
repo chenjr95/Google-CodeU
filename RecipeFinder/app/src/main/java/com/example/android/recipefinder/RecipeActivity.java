@@ -89,7 +89,7 @@ public class RecipeActivity extends ActionBarActivity {
                 else{
                     LoginActivity.favorites.remove(id);
                 }
-                LoginActivity.user.put("Favorites", LoginActivity.favorites);
+                LoginActivity.user.put("Favorites", LoginActivity.join(LoginActivity.favorites));
                 LoginActivity.user.saveInBackground(mSaveCallback);
             }
         });

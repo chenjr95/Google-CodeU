@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -73,5 +75,32 @@ public class HomeActivity extends ActionBarActivity {
         TextView t = (TextView) findViewById(R.id.search_entry);
         i.putExtra("search", t.getText().toString().replace(" ", "%20"));
         startActivity(i);
+    }
+
+    public void showAdvanced (View view){
+        EditText cuisine = (EditText) findViewById(R.id.cuisine);
+        EditText ingredients = (EditText) findViewById(R.id.ingredients);
+        Button b = (Button) findViewById(R.id.show);
+
+        if(b.getText().toString().equals("Show Advanced")){
+            b.setText("Hide Advanced");
+        }
+        else{
+            b.setText("Show Advanced");
+        }
+
+        if(cuisine.getVisibility() == View.VISIBLE){
+            cuisine.setVisibility(View.GONE);
+        }
+        else{
+            cuisine.setVisibility(View.VISIBLE);
+        }
+
+        if(ingredients.getVisibility() == View.VISIBLE){
+            ingredients.setVisibility(View.GONE);
+        }
+        else{
+            ingredients.setVisibility(View.VISIBLE);
+        }
     }
 }
