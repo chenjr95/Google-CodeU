@@ -20,26 +20,15 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -50,7 +39,7 @@ public class LoginActivity extends ActionBarActivity {
     private static final Integer WRONG_PASSWORD = 1;
     private static final Integer LOGIN_SUCCESS = 2;
 
-    public static String favorites = "";
+    public static HashSet<String> favorites;
     public static ParseObject user = null;
 
     /**
@@ -259,7 +248,7 @@ public class LoginActivity extends ActionBarActivity {
                 usernameField.setText("");
                 passwordField.setText("");
 
-                LoginActivity.favorites = users.get(0).getString("Favorites");
+                LoginActivity.favorites = split(users.get(0).getString("Favorites"));
                 LoginActivity.user = users.get(0);
 
                 Intent i = new Intent(loginActivity, HomeActivity.class);
@@ -282,5 +271,27 @@ public class LoginActivity extends ActionBarActivity {
             mAuthTask = null;
             showProgress(false);
         }
+
+
+    }
+
+//    - Enter key to search
+//    - UI change to fix the resizing
+//    - favorites --> hashset
+
+
+    public static String join(HashSet<String> S) {
+        String result = S.toString();
+        String temp = result.substring(1, result.length() - 1).replaceAll(" ", "");
+        return temp;
+    }
+
+    public static HashSet<String> split(String S) {
+        String[] temp = S.split(",");
+        HashSet<String> result = new HashSet<String>();
+        for (int i = 0; i < temp.length; i++) {
+            result.add(temp[i]);
+        }
+        return result;
     }
 }

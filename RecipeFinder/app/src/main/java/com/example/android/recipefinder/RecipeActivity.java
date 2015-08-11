@@ -3,15 +3,13 @@ package com.example.android.recipefinder;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -84,25 +82,14 @@ public class RecipeActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 if(saveCheckbox.isChecked()){
-                    if(LoginActivity.favorites.isEmpty()){
-                        LoginActivity.favorites = id;
-                    }
-                    else{
-                        LoginActivity.favorites = LoginActivity.favorites + "," + id;
-                    }
+                    LoginActivity.favorites.add(id);
+
                 }
                 else{
-                    if(LoginActivity.favorites.contains("," + id)){
-                        LoginActivity.favorites = LoginActivity.favorites.replace("," + id, "");
-                    }
-                    else if(LoginActivity.favorites.contains(id + ",")){
-                        LoginActivity.favorites = LoginActivity.favorites.replace(id + "," , "");
-                    }
-                    else{
-                        LoginActivity.favorites = LoginActivity.favorites.replace(id , "");
-                    }
+                    LoginActivity.favorites.remove(id);
                 }
-                LoginActivity.user.put("Favorites", LoginActivity.favorites);
+                LoginActivity.user.put("Favorites", LoginActivity.join(LoginActivity.favorites));
+                Log.d("logging stuff", LoginActivity.join(LoginActivity.favorites));
                 LoginActivity.user.saveInBackground(mSaveCallback);
             }
         });
