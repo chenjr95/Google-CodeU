@@ -23,8 +23,8 @@ public class HomeActivity extends ActionBarActivity {
         setContentView(R.layout.activity_home);
 
         ListView listView = (ListView) findViewById(R.id.listView);
-        final String[] favoriteIds = LoginActivity.favorites.split(",");
-        final String[] favoriteNames = LoginActivity.favorites.replace("-", " ").split(",");
+        final String[] favoriteIds = LoginActivity.join(LoginActivity.favorites).split(",");
+        final String[] favoriteNames = LoginActivity.join(LoginActivity.favorites).replace("-", " ").split(",");
 
         ArrayAdapter<String> arrayAdapter =
                 new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, favoriteNames);

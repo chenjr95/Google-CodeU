@@ -7,34 +7,29 @@
     android:orientation="vertical"
     tools:context="com.example.android.recipefinder.HomeActivity">
 
-
-    <LinearLayout
+    <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <EditText
-            android:layout_width="fill_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:hint="keyword (required)"
-            android:id="@+id/search_entry"
-            android:inputType="text" android:maxLines="1"
-            android:singleLine="true"
-            android:layout_marginBottom="30px" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:hint="Enter Key Ingredient"
+        android:id="@+id/search_entry"
+        android:inputType="text" android:maxLines="1"
+        android:paddingRight="60dp"
+        android:imeOptions="actionSearch"
+        android:layout_marginBottom="60px" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/search_button"
-            android:layout_alignParentRight="true"
-            style="?android:textAppearanceSmall"
-            android:text="Search"
-            android:onClick="search"
-            android:layout_marginBottom="30px"/>
-
-    </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_button"
+        android:layout_alignTop="@+id/search_entry"
+        android:layout_alignBottom="@+id/search_entry"
+        android:paddingBottom="2dp"
+        android:layout_alignRight="@+id/search_entry"
+        android:src="@android:drawable/ic_menu_search"
+        android:layout_centerVertical="true"
+        android:text="Search"
+        android:onClick="search" />
 
     <TextView
         android:layout_width="wrap_content"

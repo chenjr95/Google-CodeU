@@ -84,23 +84,10 @@ public class RecipeActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 if(saveCheckbox.isChecked()){
-                    if(LoginActivity.favorites.isEmpty()){
-                        LoginActivity.favorites = id;
-                    }
-                    else{
-                        LoginActivity.favorites = LoginActivity.favorites + "," + id;
-                    }
+                    LoginActivity.favorites.add(id);
                 }
                 else{
-                    if(LoginActivity.favorites.contains("," + id)){
-                        LoginActivity.favorites = LoginActivity.favorites.replace("," + id, "");
-                    }
-                    else if(LoginActivity.favorites.contains(id + ",")){
-                        LoginActivity.favorites = LoginActivity.favorites.replace(id + "," , "");
-                    }
-                    else{
-                        LoginActivity.favorites = LoginActivity.favorites.replace(id , "");
-                    }
+                    LoginActivity.favorites.remove(id);
                 }
                 LoginActivity.user.put("Favorites", LoginActivity.favorites);
                 LoginActivity.user.saveInBackground(mSaveCallback);
