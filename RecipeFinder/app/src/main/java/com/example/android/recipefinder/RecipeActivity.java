@@ -3,15 +3,13 @@ package com.example.android.recipefinder;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -89,7 +87,7 @@ public class RecipeActivity extends ActionBarActivity {
                 else{
                     LoginActivity.favorites.remove(id);
                 }
-                LoginActivity.user.put("Favorites", LoginActivity.favorites);
+                LoginActivity.user.put("Favorites", LoginActivity.join(LoginActivity.favorites));
                 LoginActivity.user.saveInBackground(mSaveCallback);
             }
         });

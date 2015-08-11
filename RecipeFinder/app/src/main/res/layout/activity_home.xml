@@ -40,7 +40,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_gravity="center"
         android:layout_below="@+id/search_button"
         android:text="Your Favorite Recipes"
         android:textAppearance="?android:attr/textAppearanceMedium" />
