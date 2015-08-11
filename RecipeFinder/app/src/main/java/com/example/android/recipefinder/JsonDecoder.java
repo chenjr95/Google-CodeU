@@ -1,13 +1,9 @@
 package com.example.android.recipefinder;
 
-import android.util.Log;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 
@@ -76,7 +72,6 @@ public class JsonDecoder {
     public ArrayList<String> getSearchResults(){
         JsonArray ing_array = decoded.get("results").getAsJsonArray();
         ArrayList<String> result = new ArrayList<>();
-
         for(JsonElement j : ing_array){
             result.add(j.getAsJsonObject().get("id").toString().replace("\"", ""));
         }
@@ -87,9 +82,12 @@ public class JsonDecoder {
     public String getDirections(){
         JsonArray dir_array = decoded.get("directions").getAsJsonArray();
         String result = "";
-
+        int step = 1;
+        String temp = "";
         for(JsonElement j : dir_array){
-            result += "-" + j.toString() + "\n";
+            temp = j.toString().replace("\"", "");
+            result += step + ") " + j.toString() + "\n";
+            step++;
         }
         return result;
     }
