@@ -41,12 +41,12 @@ public class SearchActivity extends ActionBarActivity {
         progressView = findViewById(R.id.progress_view);
 
         Intent i = getIntent();
-        String search = i.getStringExtra("search");
+        String request = i.getStringExtra("search");
 
         c = this;
 
         showProgress(true);
-        new RequestTask().execute("http://api.pearson.com/kitchen-manager/v1/recipes?name-contains=" + search + "&limit=20");
+        new RequestTask().execute(request);
     }
 
     private class RequestTask extends AsyncTask<String, String, String> {

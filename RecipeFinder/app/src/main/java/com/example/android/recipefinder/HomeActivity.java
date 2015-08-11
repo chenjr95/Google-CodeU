@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -72,8 +74,31 @@ public class HomeActivity extends ActionBarActivity {
 
     public void search (View view){
         Intent i = new Intent(this, SearchActivity.class);
-        TextView t = (TextView) findViewById(R.id.search_entry);
-        i.putExtra("search", t.getText().toString().replace(" ", "%20"));
+        EditText name_field = (EditText) findViewById(R.id.search_entry);
+        EditText cuisine_field = (EditText) findViewById(R.id.cuisine);
+        EditText ing_field = (EditText) findViewById(R.id.ingredients);
+
+        String search = "http://api.pearson.com/kitchen-manager/v1/recipes?name-contains=";
+
+        if(name_field.getText().toString().isEmpty()){
+            Toast.makeText(HomeActivity.this, "Keyword required!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else{
+            search += name_field.getText().toString().replace("-", "%20");
+        }
+
+        if(!cuisine_field.getText().toString().isEmpty()){
+            search += ("&cuisine=" + cuisine_field.getText().toString());
+        }
+
+        if(!ing_field.getText().toString().isEmpty()){
+            search += ("&ingredients-any=" + ing_field.getText().toString());
+        }
+
+        search += "&limit=20";
+        Log.d("stuff", search);
+        i.putExtra("search", search);
         startActivity(i);
     }
 
