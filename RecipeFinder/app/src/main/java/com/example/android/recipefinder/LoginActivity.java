@@ -282,9 +282,8 @@ public class LoginActivity extends ActionBarActivity {
 
     public static String join(HashSet<String> S) {
         String result = S.toString();
-        result.replaceAll(" ", "");
-        result = result.substring(1, result.length() - 1);
-        return result;
+        String temp = result.substring(1, result.length() - 1).replaceAll(" ", "");
+        return temp;
     }
 
     public static HashSet<String> split(String S) {
