@@ -1,42 +1,45 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.android.recipefinder.HomeActivity">
 
-    <EditText
+    <LinearLayout
         android:layout_width="fill_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+    <EditText
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="7"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:hint="Enter Key Ingredient"
         android:id="@+id/search_entry"
         android:inputType="text" android:maxLines="1"
-        android:paddingRight="60dp"
-        android:imeOptions="actionSearch"
-        android:layout_marginBottom="60px" />
+        android:imeOptions="actionSearch" />
 
     <ImageView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
         android:id="@+id/search_button"
-        android:layout_alignTop="@+id/search_entry"
-        android:layout_alignBottom="@+id/search_entry"
-        android:paddingBottom="2dp"
-        android:layout_alignRight="@+id/search_entry"
         android:src="@android:drawable/ic_menu_search"
         android:layout_centerVertical="true"
         android:text="Search"
         android:onClick="search" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:gravity="center"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/underlinedFavorites"
         android:textColor="@color/black"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="24dp"
         android:paddingTop="8dp"
         android:id="@+id/textView"
         android:layout_below="@+id/search_button"
@@ -46,10 +49,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
+        android:textColor="@color/black"
+        android:fontFamily="sans-serif-light"
+        android:textSize="16dp"
         android:divider="#000000"
         android:dividerHeight="4px"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView"
         android:layout_weight="1"
         android:fadingEdge="none"/>
-</RelativeLayout>
+</LinearLayout>
