@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -79,8 +81,11 @@ public class SearchActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(String result) {
+            TextView numView = (TextView) findViewById(R.id.textView);
             JsonDecoder decoder = new JsonDecoder(result);
             ids = decoder.getSearchResults();
+
+            numView.setText("Number of results: " + decoder.getTotal());
 
             ArrayList<String> favoritesName =  new ArrayList<>();
             for(String s : ids){

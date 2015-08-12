@@ -69,6 +69,10 @@ public class JsonDecoder {
         return result;
     }
 
+    public String getTotal() {
+        return decoded.get("total").getAsString();
+    }
+
     public ArrayList<String> getSearchResults(){
         JsonArray ing_array = decoded.get("results").getAsJsonArray();
         ArrayList<String> result = new ArrayList<>();
