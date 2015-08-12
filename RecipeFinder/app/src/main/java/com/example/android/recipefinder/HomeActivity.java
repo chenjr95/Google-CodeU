@@ -87,7 +87,7 @@ public class HomeActivity extends ActionBarActivity {
         }
 
         if(!name_field.getText().toString().isEmpty()){
-            search += ("name-contains=" + name_field.getText().toString().replace("-", "%20"));
+            search += ("name-contains=" + name_field.getText().toString().replace(" ", "%20"));
         }
 
         if(!cuisine_field.getText().toString().isEmpty() && Character.isUpperCase(cuisine_field.getText().toString().charAt(0))){
@@ -102,7 +102,7 @@ public class HomeActivity extends ActionBarActivity {
             search += ("&ingredients-any=" + ing_field.getText().toString());
         }
 
-        search += "&limit=20";
+        search += "&limit=50";
         Log.d("stuff", search);
         i.putExtra("search", search);
         startActivity(i);
