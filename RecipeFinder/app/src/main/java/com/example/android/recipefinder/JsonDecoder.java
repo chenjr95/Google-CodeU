@@ -86,7 +86,7 @@ public class JsonDecoder {
         String temp = "";
         for(JsonElement j : dir_array){
             temp = j.toString().replace("\"", "");
-            result += step + ") " + j.toString() + "\n";
+            result += step + ") " + temp + "\n";
             step++;
         }
         return result;
