@@ -99,7 +99,7 @@ public class HomeActivity extends ActionBarActivity {
         }
 
         if(!ing_field.getText().toString().isEmpty()){
-            search += ("&ingredients-any=" + ing_field.getText().toString());
+            search += ("&ingredients-any=" + ing_field.getText().toString().replace(" ", ""));
         }
 
         search += "&limit=50";
