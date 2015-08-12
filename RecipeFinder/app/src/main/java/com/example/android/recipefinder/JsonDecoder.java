@@ -69,6 +69,10 @@ public class JsonDecoder {
         return result;
     }
 
+    public String getTotal() {
+        return decoded.get("total").getAsString();
+    }
+
     public ArrayList<String> getSearchResults(){
         JsonArray ing_array = decoded.get("results").getAsJsonArray();
         ArrayList<String> result = new ArrayList<>();
@@ -86,7 +90,7 @@ public class JsonDecoder {
         String temp = "";
         for(JsonElement j : dir_array){
             temp = j.toString().replace("\"", "");
-            result += step + ") " + j.toString() + "\n";
+            result += step + ") " + temp + "\n";
             step++;
         }
         return result;

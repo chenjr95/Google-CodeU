@@ -64,7 +64,6 @@ public class RecipeActivity extends ActionBarActivity {
         directionsView = (TextView) findViewById(R.id.directions_body);
         imgView = (ImageView) findViewById(R.id.image_body);
 
-        Button saveButton = (Button) findViewById(R.id.save_button);
         final CheckBox saveCheckbox = (CheckBox) findViewById(R.id.save_check);
 
         if(LoginActivity.favorites.contains(id)){
@@ -78,7 +77,14 @@ public class RecipeActivity extends ActionBarActivity {
             }
         };
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
+        final SaveCallback mDeleteCallback = new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                Toast.makeText(RecipeActivity.this, "Recipe deleted!", Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        saveCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(saveCheckbox.isChecked()){
@@ -88,7 +94,12 @@ public class RecipeActivity extends ActionBarActivity {
                     LoginActivity.favorites.remove(id);
                 }
                 LoginActivity.user.put("Favorites", LoginActivity.join(LoginActivity.favorites));
-                LoginActivity.user.saveInBackground(mSaveCallback);
+                if(saveCheckbox.isChecked()){
+                    LoginActivity.user.saveInBackground(mSaveCallback);
+                }
+                else{
+                    LoginActivity.user.saveInBackground(mDeleteCallback);
+                }
             }
         });
 

@@ -78,18 +78,24 @@ public class HomeActivity extends ActionBarActivity {
         EditText cuisine_field = (EditText) findViewById(R.id.cuisine);
         EditText ing_field = (EditText) findViewById(R.id.ingredients);
 
-        String search = "http://api.pearson.com/kitchen-manager/v1/recipes?name-contains=";
+        String search = "http://api.pearson.com/kitchen-manager/v1/recipes?";
 
-        if(name_field.getText().toString().isEmpty()){
-            Toast.makeText(HomeActivity.this, "Keyword required!", Toast.LENGTH_SHORT).show();
+        if(name_field.getText().toString().isEmpty() && cuisine_field.getText().toString().isEmpty() &&
+                ing_field.getText().toString().isEmpty()){
+            Toast.makeText(HomeActivity.this, "At least one field must be filled in!", Toast.LENGTH_SHORT).show();
             return;
         }
-        else{
-            search += name_field.getText().toString().replace("-", "%20");
+
+        if(!name_field.getText().toString().isEmpty()){
+            search += ("name-contains=" + name_field.getText().toString().replace("-", "%20"));
         }
 
-        if(!cuisine_field.getText().toString().isEmpty()){
+        if(!cuisine_field.getText().toString().isEmpty() && Character.isUpperCase(cuisine_field.getText().toString().charAt(0))){
             search += ("&cuisine=" + cuisine_field.getText().toString());
+        }
+        else if(!cuisine_field.getText().toString().isEmpty() && Character.isLowerCase(cuisine_field.getText().toString().charAt(0))){
+            Toast.makeText(HomeActivity.this, "Cuisine must be capitalized!", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         if(!ing_field.getText().toString().isEmpty()){
